@@ -4,6 +4,10 @@ readonly res=$1
 readonly nums=$(echo $@ | cut -d' ' -f2-)
 readonly num_nums=$(($# - 1))
 
+usage() {
+	echo "Usage: $(basename $0) target_num num1 [num2 num3 ..]"
+}
+
 find_num() {
 	local now_num=$(echo $nums | cut -d' ' -f$1)
 	local calc_form
@@ -29,4 +33,7 @@ find_num() {
 	done
 }
 
-find_num 1
+case $# in
+0|1) usage;;
+*) find_num 1;;
+esac
